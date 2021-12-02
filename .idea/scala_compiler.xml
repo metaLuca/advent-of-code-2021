@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ScalaCompilerConfiguration">
+    <profile name="sbt 1" modules="advent-of-code-2021" />
+    <profile name="sbt 2" modules="adventofcode,global">
+      <option name="higherKinds" value="true" />
+      <option name="existentials" value="true" />
+      <option name="deprecationWarnings" value="true" />
+      <option name="uncheckedWarnings" value="true" />
+      <option name="featureWarnings" value="true" />
+      <option name="explainTypeErrors" value="true" />
+      <parameters>
+        <parameter value="-encoding" />
+        <parameter value="UTF-8" />
+        <parameter value="-opt-warnings" />
+        <parameter value="-opt:l:inline" />
+        <parameter value="-opt-inline-from:&lt;source&gt;" />
+        <parameter value="-Yrangepos" />
+        <parameter value="-Ywarn-numeric-widen" />
+        <parameter value="-Ywarn-extra-implicit" />
+        <parameter value="-Xlint:_,-type-parameter-shadow,-unused" />
+        <parameter value="-Xfatal-warnings" />
+      </parameters>
+      <plugins>
+        <plugin path="$USER_HOME$/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/olegpy/better-monadic-for_2.13/0.3.1/better-monadic-for_2.13-0.3.1.jar" />
+      </plugins>
+    </profile>
+  </component>
+</project>
