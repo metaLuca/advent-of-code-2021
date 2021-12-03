@@ -2,11 +2,11 @@ package adventofcode
 
 import adventofcode.AdventOfCode2021.{parseInput, resultToString}
 
-object Day2 {
+object Day2_2 {
   case class Mission(submarine: Submarine, plan: LazyList[MoveCommand])
 
   case class Submarine(position: Position)
-  case class Position(horizontal: Int, depth: Int)
+  case class Position(horizontal: Int, depth: Int, aim: Int)
 
   sealed trait MoveCommand
   case class Up(by: Int) extends MoveCommand
@@ -25,12 +25,12 @@ object Day2 {
   def parseMoveCommands(lines: LazyList[String]): LazyList[MoveCommand] = lines.map(parseCommand)
 
   def move(submarine: Submarine, command: MoveCommand): Submarine = {
-    val position = submarine.position
+    val (horizontal, depth, aim) = Position.unapply(submarine.position).get
     Submarine(command match {
-      case Up(by) => position.copy(depth = position.depth - by)
-      case Down(by) => position.copy(depth = position.depth + by)
-      case Forward(by) => position.copy(horizontal = position.horizontal + by)
-      case Unknown() => position
+      case Up(by) => Position(horizontal, depth, aim - by)
+      case Down(by) => Position(horizontal, depth, aim + by)
+      case Forward(by) => Position(horizontal + by, depth + (aim*by), aim)
+      case Unknown() => submarine.position
     })
   }
 
@@ -44,7 +44,7 @@ object Day2 {
 
   def main(args: Array[String]): Unit = {
     val finalPosition = parseInput("day2.txt")(parseMoveCommands)
-      .map(Mission(Submarine(Position(0, 0)), _))
+      .map(Mission(Submarine(Position(0, 0, 0)), _))
       .map(executeMission)
       .map(x => multiplyPosition(x.submarine.position))
     println(resultToString(finalPosition))
