@@ -1,7 +1,6 @@
 package adventofcode
 
-import adventofcode.AdventOfCode2021.{parseInput, resultToString}
-import cats.effect.IO
+import adventofcode.AdventOfCode2021._
 
 import scala.annotation.tailrec
 

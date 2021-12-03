@@ -1,6 +1,6 @@
 package adventofcode
 
-import adventofcode.Day1.{countDepthIncrement, parseSonarSweeps}
+import adventofcode.Day1._
 
 class Day1Test extends munit.FunSuite {
 
