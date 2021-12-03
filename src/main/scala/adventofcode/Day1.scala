@@ -19,8 +19,18 @@ object Day1 {
     case _ => startingFrom
   }
 
+  @tailrec
+  def window3(sweeps: LazyList[SonarSweep], acc: LazyList[SonarSweep] = LazyList.empty): LazyList[SonarSweep] = sweeps match {
+    case list if list.sizeIs == 3 => acc.appended(list.sum)
+    case first #:: second #:: third #:: rest => window3(second #:: third #:: rest, acc.appended(first+second+third))
+    case _ => acc
+  }
+
   def main(args: Array[String]): Unit = {
-    val depthIncrements = parseInput("day1.txt")(parseSonarSweeps).map(countDepthIncrement(_))
+    val sonar: Either[Error, Sonar] = parseInput("day1.txt")(parseSonarSweeps)
+    val depthIncrements = sonar.map(countDepthIncrement(_))
+    val depthIncrementsWindow3 = sonar.map(x => Sonar(window3(x.sweeps))).map(countDepthIncrement(_))
     println(resultToString(depthIncrements))
+    println(resultToString(depthIncrementsWindow3))
   }
 }
